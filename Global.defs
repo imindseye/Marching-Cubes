@@ -1,0 +1,52 @@
+#############################################################
+# Global.defs - Global defines for making
+#
+# Note: This is where user's should set the compiler options
+#       in order to target a specific arcitecture [e.g. 64 bit]
+#       or to customize the make [e.g. -g or -D[user definition]
+#       This file should be included by all Makefiles in the tree.
+#
+#############################################################
+
+# USER: Set your compiler flags here...
+# NOTE: IMPORTANT! You will also need to change GLBL_LINK below
+
+THREADLIB = SPROC
+#THREADLIB = PTHREAD
+
+GLBL_FLAGS      = -I. -O2 -DPRERELEASE -D$(THREADLIB)
+
+
+#############################################################
+
+#sproc:
+GLBL_LINK = 
+
+#pthread:
+# GLBL_LINK = -lpthread
+
+#############################################################
+
+CC		= cc
+CPLUSPLUS       = g++
+FORTRAN         = f77
+MAKE		= make
+RANLIB          = ar tsl
+SHELL           = /bin/sh
+ARFLAGS         = rsvcl
+
+#############################################################
+.SUFFIXES: .c .cc .C .f
+
+.c.o:
+	$(CC) $(GLBL_FLAGS) -c $(LOCAL_FLAGS) $<
+
+.C.o:
+	$(CPLUSPLUS) $(GLBL_FLAGS) -c $(LOCAL_FLAGS) $<
+
+.cc.o:
+	$(CPLUSPLUS) $(GLBL_FLAGS) -c $(LOCAL_FLAGS) $<
+
+.f.o:
+	$(FORTRAN) $(GLBL_FLAGS) -c $(LOCAL_FLAGS) $<
+
